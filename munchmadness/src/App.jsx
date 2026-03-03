@@ -1,28 +1,126 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
 
-  const streakVal = "";
-  
-  const calGoal = "";
-  const proGoal = "";
-  const carbGoal = "";
-  const fatGoal = "";
+  useEffect(() => {
+    const lastReset = localStorage.getItem("lastReset");
+    const today = new Date().toDateString();
+    const streakNum = Number(localStorage.getItem("streak") || 0);
 
-  const currCal = "";
-  const currPro = "";
-  const currCarb = "";
-  const currFat = "";
+    if (lastReset !== today){
+      if(+totalCal >= +calGoal && +totalPro >= +proGoal){
+        localStorage.setItem("streak", streakNum + 1);
+      }
+      else{
+        localStorage.setItem("streak", 0);
+      }
+
+      localStorage.setItem("totalCal", 0);
+      localStorage.setItem("totalPro", 0);
+      localStorage.setItem("totalCarb", 0);
+      localStorage.setItem("totalFat", 0);
+      
+      localStorage.setItem("lastReset", today);
+    }
+  }, []);
+
+  const streakVal = localStorage.getItem("streak");
+
+  const [calGoal, setCalGoal] = useState(localStorage.getItem("calGoal"));
+
+  const calGoalChange = (e) => {
+    const newCalGoal = e.target.value;
+    setCalGoal(newCalGoal);
+    localStorage.setItem("calGoal", newCalGoal);
+  };
+
+  const [proGoal, setProGoal] = useState(localStorage.getItem("proGoal"));
+
+  const proGoalChange = (e) => {
+    const newProGoal = e.target.value;
+    setProGoal(newProGoal);
+    localStorage.setItem("proGoal", newProGoal);
+  };
+
+  const [carbGoal, setCarbGoal] = useState(localStorage.getItem("carbGoal"));
+
+  const carbGoalChange = (e) => {
+    const newCarbGoal = e.target.value;
+    setCarbGoal(newCarbGoal);
+    localStorage.setItem("carbGoal", newCarbGoal);
+  };
+
+  const [fatGoal, setFatGoal] = useState(localStorage.getItem("fatGoal"));
+
+  const fatGoalChange = (e) => {
+    const newFatGoal = e.target.value;
+    setFatGoal(newFatGoal);
+    localStorage.setItem("fatGoal", newFatGoal);
+  };
+
+  const [currCal, setCurrCal] = useState(0);
+
+  const currCalChange = (e) => {
+    const newCurrCal = e.target.value;
+    setCurrCal(newCurrCal);
+  };
+
+  const [currPro, setCurrPro] = useState(0);
+
+  const currProChange = (e) => {
+    const newCurrPro = e.target.value;
+    setCurrPro(newCurrPro);
+  };
+
+  const [currCarb, setCurrCarb] = useState(0);
+
+  const currCarbChange = (e) => {
+    const newCurrCarb = e.target.value;
+    setCurrCarb(newCurrCarb);
+  };
+
+  const [currFat, setCurrFat] = useState(0);
+
+  const currFatChange = (e) => {
+    const newCurrFat = e.target.value;
+    setCurrFat(newCurrFat);
+  };
+
+  const [totalCal, setTotalCal] = useState(localStorage.getItem("totalCal"));
+  const [totalPro, setTotalPro] = useState(localStorage.getItem("totalPro"));
+  const [totalCarb, setTotalCarb] = useState(localStorage.getItem("totalCarb"));
+  const [totalFat, setTotalFat] = useState(localStorage.getItem("totalFat"));
+
+  const totalChange = (e) => {
+    const newTotalCal = +currCal + +totalCal;
+    setTotalCal(newTotalCal);
+    localStorage.setItem("totalCal", newTotalCal);
+    const newTotalPro = +currPro + +totalPro;
+    setTotalPro(newTotalPro);
+    localStorage.setItem("totalPro", newTotalPro);
+    const newTotalCarb = +currCarb + +totalCarb;
+    setTotalCarb(newTotalCarb);
+    localStorage.setItem("totalCarb", newTotalCarb);
+    const newTotalFat = +currFat + +totalFat;
+    setTotalFat(newTotalFat);
+    localStorage.setItem("totalFat", newTotalFat);
+
+    setCurrCal(0);
+    setCurrPro(0);
+    setCurrCarb(0);
+    setCurrFat(0);
+
+    alert("Eated");
+  };
 
 
 
   return (
       <div>
         <div class="streak">
-          <h3>Streak:</h3>
+          <h3>Streak:&nbsp;</h3>
+          <h3>{streakVal}</h3>
         </div>
 
         <div>
@@ -35,23 +133,70 @@ function App() {
           <div class="logContainer"> 
 
             <div class="vertSpread">
-              <p>Calories:</p>
+              <div>
+                <p>Calories:</p>
+                <p>{totalCal}</p>
+              </div>
             </div>
             
             <div class="goals">
               <h4>Goals</h4>
-              <p>Calories:</p>
-              <p>Protein:</p>
-              <p>Carbohydrates:</p>
-              <p>Fat:</p>
+
+              <div class="zontDiv">
+                <p>Calories: &nbsp;</p>
+                <input
+                  type="number"
+                  value={calGoal}
+                  onChange={calGoalChange}
+                />
+              </div>
+              
+              <div class="zontDiv">
+                <p>Protein: &nbsp;</p>
+                <input
+                  type="number"
+                  value={proGoal}
+                  onChange={proGoalChange}
+                />
+              </div>
+
+              <div class="zontDiv">
+                <p>Carbohydrates:&nbsp;</p>
+                <input
+                  type="number"
+                  value={carbGoal}
+                  onChange={carbGoalChange}
+                />
+              </div>
+
+              <div class="zontDiv">
+                <p>Fat:&nbsp;</p>
+                <input
+                  type="number"
+                  value={fatGoal}
+                  onChange={fatGoalChange}
+                />
+              </div>
+              
             </div>
 
           </div>
           
           <div class="logContainer"> 
-            <p>Protein:</p>
-            <p>Carbohydrates:</p>
-            <p>Fat:</p>
+            <div>
+              <p>Protein:</p>
+              <p>{totalPro}</p>
+            </div>
+            
+            <div>
+              <p>Carbohydrates:</p>
+              <p>{totalCarb}</p>
+            </div>
+
+            <div>
+              <p>Fat:</p>
+              <p>{totalFat}</p>
+            </div>
           </div>
           
         </div>
@@ -63,23 +208,41 @@ function App() {
          
             <div>
               <p>Calories:</p>
-              <input></input>
+              <input
+                type="number"
+                value={currCal}
+                onChange={currCalChange}
+              />
               <p>Carbohydrates:</p>
-              <input></input>
+              <input
+                type="number"
+                value={currCarb}
+                onChange={currCarbChange}
+              />
             </div>
 
             <div>
               <p>Protein:</p>
-              <input></input>
+              <input
+                type="number"
+                value={currPro}
+                onChange={currProChange}
+              />
               <p>Fat:</p>
-              <input></input>
+              <input
+                type="number"
+                value={currFat}
+                onChange={currFatChange}
+              />
             </div>
 
           </div>
         </div>
 
         <div class="logButton">
-          <button>Eat!</button>
+          <button onClick={totalChange}>
+            Eat!
+          </button>
         </div>
 
       </div>
