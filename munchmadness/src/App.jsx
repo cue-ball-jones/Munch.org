@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
+import Pie from "./ProgressCircle";
 import './App.css'
+
 
 function App() {
 
@@ -118,6 +120,19 @@ function App() {
 
   return (
       <div>
+
+        {/*start of pie chart guy code*/}       
+        <div>
+          <Pie 
+            currentVal={totalCal}
+            totalVal={calGoal}
+            units="Calories"
+            colour="red"
+            size="25vw"
+          />
+        </div>
+
+
         <div class="streak">
           <h3>Streak:&nbsp;</h3>
           <h3>{streakVal}</h3>
