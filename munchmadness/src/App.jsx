@@ -12,7 +12,13 @@ function App() {
     const streakNum = Number(localStorage.getItem("streak") || 0);
 
     if (lastReset !== today){
-      if(+totalCal >= +calGoal && +totalPro >= +proGoal){
+
+    const savedCal = Number(localStorage.getItem("totalCal") || 0);
+    const savedPro = Number(localStorage.getItem("totalPro") || 0);
+    const savedCalGoal = Number(localStorage.getItem("calGoal") || 0);
+    const savedProGoal = Number(localStorage.getItem("proGoal") || 0);
+
+      if(+savedCal >= +savedCalGoal && +savedPro >= +savedProGoal && savedCalGoal > 0 && savedProGoal > 0){
         localStorage.setItem("streak", streakNum + 1);
       }
       else{
@@ -62,28 +68,28 @@ function App() {
     localStorage.setItem("fatGoal", newFatGoal);
   };
 
-  const [currCal, setCurrCal] = useState(0);
+  const [currCal, setCurrCal] = useState("");
 
   const currCalChange = (e) => {
     const newCurrCal = e.target.value;
     setCurrCal(newCurrCal);
   };
 
-  const [currPro, setCurrPro] = useState(0);
+  const [currPro, setCurrPro] = useState("");
 
   const currProChange = (e) => {
     const newCurrPro = e.target.value;
     setCurrPro(newCurrPro);
   };
 
-  const [currCarb, setCurrCarb] = useState(0);
+  const [currCarb, setCurrCarb] = useState("");
 
   const currCarbChange = (e) => {
     const newCurrCarb = e.target.value;
     setCurrCarb(newCurrCarb);
   };
 
-  const [currFat, setCurrFat] = useState(0);
+  const [currFat, setCurrFat] = useState("");
 
   const currFatChange = (e) => {
     const newCurrFat = e.target.value;
@@ -114,7 +120,6 @@ function App() {
     setCurrCarb(0);
     setCurrFat(0);
 
-    alert("Eated");
   };
 
 
@@ -125,8 +130,15 @@ function App() {
         <header class="header">
           <h1>Munch.org</h1>
           <div class="streak">
-            <img src="/smallSM.png" alt="streakLogo" />
-            <h3>{streakVal}</h3>
+
+            <div style={{position: 'relative', top: '0px', display: 'inline-block'}}>
+
+            <span style={{fontSize: '1.1em', paddingRight: '2px'}}>{streakVal || 0}</span>
+            
+            <div style={{position: 'relative', top: '6px', display: 'inline-block'}}>
+            <img src="/newStreak for adjacent.png" alt="streakLogo" style={{width: '30px'}} />
+            </div>
+          </div>
           </div>
         </header>
 
@@ -181,126 +193,104 @@ function App() {
             </div>
 
             </div>
+
+            <div class="centerText">
+              <h2>Remaining Macros</h2>
+            </div>
             
-            <div class="styledDivCol">
-              <h4>Remaining Macros</h4>
-              <div class="containerGrid">
-                <div>
-                  <p>Calories</p>
-                </div>
-                <div>
-                  <p>Protein</p>
-                </div>
-                <div>
-                  <p>Carbohydrates</p>
-                </div>
-                <div>
-                  <p>Fat</p>
-                </div>
+            
+            <div class="logContainer">
+              <div class="styledDivRow">
+              <div class="statsGrid">
+                <span class="statValue">{calGoal - totalCal}</span>
+                <span class="statLabel">Calories</span>
+
+                <span class="statValue">{proGoal - totalPro}g</span>
+                <span class="statLabel">Protein</span>
+
+                <span class="statValue">{carbGoal - totalCarb}g</span>
+                <span class="statLabel">Carbs</span>
+
+                <span class="statValue">{fatGoal - totalFat}g</span>
+                <span class="statLabel">Fat</span>
+              </div>
               </div>
             </div>
 
-            <div class="styledDivRow">
-
-            <div class="goals">
-              <h4>Goals</h4>
-
-              <div class="zontDiv">
-                <p>Calories: &nbsp;</p>
-                <input
-                  type="number"
-                  value={calGoal}
-                  onChange={calGoalChange}
-                />
-              </div>
-              
-              <div class="zontDiv">
-                <p>Protein: &nbsp;</p>
-                <input
-                  type="number"
-                  value={proGoal}
-                  onChange={proGoalChange}
-                />
-              </div>
-
-              <div class="zontDiv">
-                <p>Carbohydrates:&nbsp;</p>
-                <input
-                  type="number"
-                  value={carbGoal}
-                  onChange={carbGoalChange}
-                />
-              </div>
-
-              <div class="zontDiv">
-                <p>Fat:&nbsp;</p>
-                <input
-                  type="number"
-                  value={fatGoal}
-                  onChange={fatGoalChange}
-                />
-              </div>
-              
-            </div>
-
-            </div>
-
-          </div>
-          
-          
-          
-        
-
-        <div>
+            <div>
 
           <div class="centerText">
-            <h2>Track Meal</h2>
-          </div>
+              <h2>Track Meal</h2>
+            </div>
 
-          <div class="styledDivCol">
+             <div class="logContainer">
+              <div class="styledDivCol">
+              <div class="statsGrid">
+                <span class="statValueTrack">Calories:&nbsp;</span>
+                <input class ="styledInputCal" inputMode="decimal" placeholder='0' value={currCal} onChange={currCalChange} />
+
+                <span class="statValueTrack">Protein:&nbsp;</span>
+                <span style={{position: 'relative'}}>
+                  <input className="styledInput" inputMode="decimal" placeholder='0' value={currPro} onChange={currProChange} />
+                  <span style={{position: 'absolute', right: '6.25vw', fontSize: '1.15em'}}>g</span>
+                </span>
+
+                <span class="statValueTrack">Carbs:&nbsp;</span>
+                <span style={{position: 'relative'}}>
+                  <input className="styledInput" inputMode="decimal" placeholder='0' value={currCarb} onChange={currCarbChange} />
+                  <span style={{position: 'absolute', right: '6.25vw', fontSize: '1.15em'}}>g</span>
+                </span>
+
+                <span class="statValueTrack">Fat:&nbsp;</span>
+                <span style={{position: 'relative'}}>
+                  <input className="styledInput" inputMode="decimal" placeholder='0' value={currFat} onChange={currFatChange} />
+                  <span style={{position: 'absolute', right: '6.25vw', fontSize: '1.15em'}}>g</span>
+                </span>
+                </div>
+
+                <div style={{paddingTop: '0.5rem', paddingBottom: '1.5rem', display: 'flex', justifyContent: 'center'}}>
+                <button style={{fontSize: '1em', paddingLeft: '5em', paddingRight: '5em', paddingTop: '0.075em', paddingBottom: '0.075em', boxShadow: '0 8px 16px 0 rgba(0, 0, 0, .15)'}} onClick={totalChange}>Eat!</button>
+                </div>
+
+              </div>
+            </div>
+
+            
+          <div class="centerText">
+            <h2>Goals</h2>
+          </div>
 
           <div class="logContainer">
-         
-            <div>
-              <p>Calories:</p>
-              <input
-                type="number"
-                value={currCal}
-                onChange={currCalChange}
-              />
-              <p>Carbohydrates:</p>
-              <input
-                type="number"
-                value={currCarb}
-                onChange={currCarbChange}
-              />
+              <div class="styledDivCol">
+              <div class="statsGrid">
+                <input className="styledInput2" inputMode="decimal" placeholder='0' value={calGoal} onChange={calGoalChange} />
+                <span class="statValueTrack2">&nbsp;Calories&nbsp;</span>
+                
+                <input className="styledInput2" inputMode="decimal" placeholder='0' value={proGoal} onChange={proGoalChange} />
+                <span class="statValueTrack2">g Protein&nbsp;</span>
+
+                <input className="styledInput2" inputMode="decimal" placeholder='0' value={carbGoal} onChange={carbGoalChange}/>
+                <span class="statValueTrack2">g Carbs&nbsp;</span>
+
+                <input className="styledInput2" inputMode="decimal" placeholder='0' value={fatGoal} onChange={fatGoalChange} />
+                <span class="statValueTrack2">g Fat&nbsp;</span>
+                
+                  
+                </div>
+
+              </div>
             </div>
 
-            <div>
-              <p>Protein:</p>
-              <input
-                type="number"
-                value={currPro}
-                onChange={currProChange}
-              />
-              <p>Fat:</p>
-              <input
-                type="number"
-                value={currFat}
-                onChange={currFatChange}
-              />
-            </div>
 
           </div>
+
           </div>
-        </div>
+          
+          
+          <div style={{height: '4rem'}} />
+        
 
-        <div class="logButton">
-          <button onClick={totalChange}>
-            Eat!
-          </button>
-
-        </div>
+        
 
       </div>
 

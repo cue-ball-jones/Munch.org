@@ -7,10 +7,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-
-  color-scheme: light;
   --color-text:          #2d426e;
-  --color-textheader:    #dae1f1;
+  --color-textheader:    #d0ddfc;
   --color-background:    #91a2c9;
   --color-box:           #b1beda;
   --color-surface:       #f9f9f9;
@@ -28,7 +26,7 @@
 }
 
 html {
-  background-color: var(--color-header);
+  background: #273A63;
 }
 
 body {
@@ -36,6 +34,8 @@ body {
   min-width: 320px;
   min-height: 100vh;
   color: var(--color-text);
+  background-color: transparent;
+  overflow-x: hidden;
 }
 
 a {
@@ -48,13 +48,13 @@ a:hover {
 }
 
 h1 {
-  font-size: 2.75em;
+  font-size: 2.5em;
   line-height: 1.1;
   color: var(--color-textheader)
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 1.75rem;
 }
 
 button {
@@ -64,15 +64,21 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: var(--color-surface);
+  background-color: #d0ddfc;
   color: var(--color-text);
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: var(--color-primary);
+  border-color: #d0ddfc;
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.background {
+  min-height: 100vh;
+  overflow: hidden;
+  
 }

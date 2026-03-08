@@ -44,7 +44,7 @@ const Pie = ({currentVal, totalVal, units, colour}) => {
                 fontSize="1.9em" 
                 fill="#2d426e"
             >
-                {currentVal}{units !== "Calories" ? "g" : ""}
+                {currentVal || 0}{units !== "Calories" ? "g" : ""}
             </text>
 
             <text

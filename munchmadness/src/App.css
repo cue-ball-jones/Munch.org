@@ -7,7 +7,7 @@
   display: flex;
   justify-content: right;
   align-items: center;
-  color: var(--color-textheader)
+  color: var(--color-textheader);
 }
 
 .background{
@@ -20,8 +20,9 @@
   flex-direction: row;
   align-items: center;
   background-color: var(--color-header);
+  padding-top: 0.25rem;
   padding-left: 1.5rem;
-  padding-bottom: 1.5rem;
+  padding-bottom: 1.75rem;
   padding-right: 1.5rem;
 }
 
@@ -31,7 +32,6 @@
   justify-content: center;
   padding-left: 1rem;
   padding-right: 1rem;
-  padding-bottom: 1rem;
 }
 
 .logButton{
@@ -49,6 +49,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  align-items: center;
   flex: 1;
 }
 
@@ -60,6 +61,7 @@
 .styledDivRow{
   display: flex;
   flex-direction: row;
+  justify-content: center;
   flex: 1;
 
   background: var(--color-box);
@@ -70,6 +72,8 @@
 .styledDivCol{
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  flex: 1;
 
   background: var(--color-box);
   border-radius: 10px;
@@ -86,4 +90,95 @@
 .centerText{
   text-align: center;
   padding: 1rem;
+  padding-top: 1rem;
 }
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  width: 100%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  row-gap: 1rem;
+}
+
+.statValue {
+  text-align: right;
+  font-size: 1.25em;
+}
+
+.statValueTrack {
+  text-align: right;
+  font-size: 1.15em;
+}
+
+.statValueTrack2 {
+  text-align: left;
+  font-size: 1.15em;
+}
+
+.statLabel {
+  text-align: left;
+  font-size: 1.25em;
+  padding-left: 4px;
+}
+
+.vertForButton {
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.styledInputCal {
+  font-family: inherit;
+  color: var(--color-text);
+  font-size: 1.15em;
+  border: none;
+  background: #d0ddfc;
+  outline: none;
+  border-radius: 8px;
+  width: 16vw;
+  text-align: right;
+  margin-top: 0.15em;
+  padding-right: 0.25em;
+  padding-bottom: 0.175em;
+  height: 1.25em;
+}
+
+.styledInput {
+  font-family: inherit;
+  color: var(--color-text);
+  font-size: 1.15em;
+  border: none;
+  background: #d0ddfc;
+  outline: none;
+  border-radius: 8px;
+  width: 16vw;
+  text-align: right;
+  margin-top: 0.15em;
+  padding-right: 0.86em;
+  padding-bottom: 0.175em;
+  height: 1.25em;
+}
+
+.styledInput2 {
+  font-family: inherit;
+  color: var(--color-text);
+  font-size: 1.15em;
+  border: none;
+  background: none;
+  outline: none;
+  border-radius: 8px;
+  width: 4ch;
+  text-align: right;
+  margin-top: 0.15em;
+  padding-bottom: 0.175em;
+  height: 1.25em;
+  margin-left: auto;
+}
+
+input::placeholder {
+  color: #2d426e;
+}
+
